@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
 using WebProject.Hubs;
 
-namespace WebProject.Controllers
+namespace WebProject.GameClasses
 {
     public class GameUI : IGameUI
     {

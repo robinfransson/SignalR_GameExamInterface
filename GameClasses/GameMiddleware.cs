@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace WebProject.Controllers
+namespace WebProject.GameClasses
 {
     public class GameMiddleware
     {

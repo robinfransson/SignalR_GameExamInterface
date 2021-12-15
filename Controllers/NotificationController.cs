@@ -1,8 +1,7 @@
-﻿using GameEngine;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
+using WebProject.GameClasses;
 using WebProject.Hubs;
 
 namespace WebProject.Controllers

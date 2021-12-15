@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Threading.Tasks;
-using WebProject.Controllers;
+using WebProject.GameClasses;
 
 namespace WebProject.Hubs
 {
