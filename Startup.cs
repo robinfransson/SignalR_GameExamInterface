@@ -74,7 +74,7 @@ namespace WebProject
                     pattern: "{controller}/{action=Index}/{id?}");
 
 
-                endpoints.MapHub<NotificationHub>("/notifications");
+                endpoints.MapHub<GameHub>("/notifications");
             });
 
             app.UseSpa(spa =>

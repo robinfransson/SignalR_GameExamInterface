@@ -8,13 +8,13 @@ namespace WebProject.Controllers
     public class GameUI : IGameUI
     {
 
-        public GameUI(IHubContext<NotificationHub, INotificationHub> hubContext, GameMiddleware middleware)
+        public GameUI(IHubContext<GameHub, IGameHub> hubContext, GameMiddleware middleware)
         {
             HubContext = hubContext;
             Middleware = middleware;
         }
 
-        public IHubContext<NotificationHub, INotificationHub> HubContext { get; }
+        public IHubContext<GameHub, IGameHub> HubContext { get; }
         public GameMiddleware Middleware { get; }
 
         public void Clear()
@@ -24,7 +24,7 @@ namespace WebProject.Controllers
 
         public bool Continue()
         {
-            HubContext.Clients.All.SendQuestion("Want to continue?");
+            HubContext.Clients.All.RecieveQuestion("Want to continue?");
             return Middleware.AwaitAnswer().GetAwaiter().GetResult();
         }
 
@@ -41,7 +41,7 @@ namespace WebProject.Controllers
 
         public void ShowHiscores(IEnumerable<Player> hiscores)
         {
-            HubContext.Clients.All.SendHiscores(hiscores);
+            HubContext.Clients.All.RecieveHiscores(hiscores);
         }
     }
 }

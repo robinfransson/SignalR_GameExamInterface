@@ -5,6 +5,7 @@ namespace WebProject.Controllers
 {
     public class GameMiddleware
     {
+        public bool GameStarted { get; set; }
         public string UserInput { get; set; }
         public string Output { get; set; }
         public bool? Continue { get; set; }

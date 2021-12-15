@@ -11,46 +11,22 @@ namespace WebProject.Controllers
     [ApiController]
     public class NotificationController : ControllerBase
     {
-        public NotificationController(IHubContext<NotificationHub, INotificationHub> hubContext, GameMiddleware middleware)
+        public NotificationController(IHubContext<GameHub, IGameHub> hubContext, GameMiddleware middleware)
         {
             HubContext = hubContext;
             Middleware = middleware;
         }
 
-        public IHubContext<NotificationHub, INotificationHub> HubContext { get; }
+        public IHubContext<GameHub, IGameHub> HubContext { get; }
         public GameMiddleware Middleware { get; }
 
         [HttpPost]
         public async Task<IActionResult> NotificationOnPostAsync([FromBody] string notification)
         {
-            var message = new Message
-            {
-                Text = notification,
-                User = "admin"
-            };
-            await HubContext.Clients.All.ReceiveMessage(message);
+            await HubContext.Clients.All.ReceiveMessage(notification);
             return Ok();
         }
 
-        [HttpGet]
-
-        public async Task<IActionResult> GetCurrentGameState()
-        {
-            if (Middleware.Output != null)
-            {
-                var message = new Message
-                {
-                    Text = Middleware.Output
-                };
-                await HubContext.Clients.All.ReceiveMessage(message);
-
-                return Ok();
-
-            }
-
-            return Ok();
-
-        }
         
     }
 }

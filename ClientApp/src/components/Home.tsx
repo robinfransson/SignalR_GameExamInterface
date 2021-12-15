@@ -46,11 +46,11 @@ export const Home = () => {
         .then((result) => {
           console.log("Connected!");
 
-          connection.on("ReceiveMessage", (data: Message) => {
-            setGameInfoRecieved((x) => (x += data.text + "\n"));
+          connection.on("ReceiveMessage", (data: string) => {
+            setGameInfoRecieved((x) => (x += data + "\n"));
           });
 
-          connection.on("SendQuestion", (question: string) => {
+          connection.on("RecieveQuestion", (question: string) => {
             setQuestionText(question);
             setButtonVisible(true);
           });
@@ -59,13 +59,12 @@ export const Home = () => {
             setGameInfoRecieved("");
           });
 
-          connection.on("SendHiscores", (hiscores: Array<Player>) => {
-            alert(
-              hiscores.map(
-                (player) =>
-                  `${player.name} average score: ${player.averageGuesses}\n`
-              )
+          connection.on("RecieveHiscores", (hiscores: Array<Player>) => {
+            let scores = hiscores.map(
+              (player) =>
+                `${player.name} average score: ${player.averageGuesses}`
             );
+            setGameInfoRecieved(scores.join("\n"));
           });
         })
         .catch((e: any) => console.log("Connection failed: ", e));
@@ -73,14 +72,9 @@ export const Home = () => {
   }, [connection]);
 
   const SendToServer = async () => {
-    const msg: Message = {
-      text: refer.current.state.value,
-      user: "robin",
-      timeStamp: "123",
-    };
-    console.log(msg);
+    console.log(refer.current.state.value);
     try {
-      await connection?.invoke("UserInput", msg);
+      await connection?.invoke("UserInput", refer.current.state.value);
     } catch (err) {
       console.error(err);
     }
