@@ -1,4 +1,5 @@
 using BullsAndCows;
+using BullsAndCows.Games;
 using BullsAndCows.IO;
 using GameEngine;
 using Microsoft.AspNetCore.Builder;

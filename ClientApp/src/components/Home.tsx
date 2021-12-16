@@ -17,6 +17,7 @@ export const Home = () => {
   const PlayAgain = (option: boolean) => {
     connection?.invoke("PlayAgain", option);
     setButtonVisible(false);
+    refer.current.focus();
   };
 
   const PlayAgainSelector = () => {
